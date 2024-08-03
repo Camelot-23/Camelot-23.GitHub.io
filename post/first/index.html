@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>First &middot; My New Hugo Site</title>
+  <title>C&#43;&#43;11时间操作 &middot; My New Hugo Site</title>
   <meta name="description" content="" />
 
   
@@ -50,9 +50,134 @@
 
     <main class="content container">
     <div class="post">
-  <h1>First</h1>
+  <h1>C&#43;&#43;11时间操作</h1>
   <time datetime=2024-08-04T00:08:05&#43;0800 class="post-date">Sun, Aug 4, 2024</time>
-  
+  <h1 id="stdchrono">std::chrono</h1>
+<h2 id="时长-duration">时长 duration</h2>
+<p>表示时间间隔</p>
+<h3 id="stdratio">std::ratio</h3>
+<p>表示比率</p>
+<p>std::ratio&lt;num, den&gt;</p>
+<p>num/den</p>
+<p>den默认为1</p>
+<h4 id="成员函数">成员函数</h4>
+<hr>
+<p><code>stati cnum</code> 返回分子</p>
+<p><code>static den</code> 返回分母</p>
+<h4 id="数量级概念">数量级概念</h4>
+<p>向前：1 分(deci)  厘 (centi)  毫 (milli)  微 (micro)  纳(nano)  皮(pico)</p>
+<p>$$10^0\ \ 10^{-1}\ \ 10^{-2}\ \ 10^{-3}\ \ 10^{-6}\ \ 10^{-9}$$​</p>
+<p><code>std::deci std::centi std::milli std::micro std::nano std::pico</code></p>
+<p>向后：1 十(deca)  百(hecto)   千(kilo)  百万(mega)  吉(giga)  兆(tera)</p>
+<p>$$10^0\ \ 10^{1}\ \ 10^{2}\ \ 10^{3}\ \ 10^{6}\ \ 10^{9}\ \ 10^{12}$$</p>
+<p><code>std::deca std::hecto std::kilo std::mega std::giga std::tera</code></p>
+<h3 id="duration操作">duration操作</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span>    <span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std<span style="color:#f92672">::</span>chrono;
+</span></span><span style="display:flex;"><span>    duration<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, std<span style="color:#f92672">::</span>ratio<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">1</span><span style="color:#f92672">&gt;&gt;</span> sec1(<span style="color:#ae81ff">65</span>); <span style="color:#75715e">// 秒
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> seconds(sec1).count() <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;秒</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&lt;&lt;</span> milliseconds(sec1).count() <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;毫秒</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&lt;&lt;</span> microseconds(sec1).count() <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;微秒</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&lt;&lt;</span> nanoseconds(sec1).count() <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;纳秒</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 精度损失，需要转型
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> duration_cast<span style="color:#f92672">&lt;</span>minutes<span style="color:#f92672">&gt;</span>(sec1).count() <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;分钟&#34;</span>
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&lt;&lt;</span> duration_cast<span style="color:#f92672">&lt;</span>hours<span style="color:#f92672">&gt;</span>(sec1).count() <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;小时&#34;</span>;
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>65秒
+</span></span><span style="display:flex;"><span>65000毫秒
+</span></span><span style="display:flex;"><span>65000000微秒
+</span></span><span style="display:flex;"><span>65000000000纳秒
+</span></span><span style="display:flex;"><span>1分钟
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span>    <span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std<span style="color:#f92672">::</span>chrono;
+</span></span><span style="display:flex;"><span>    seconds <span style="color:#a6e22e">sec_1</span>(<span style="color:#ae81ff">65</span>);
+</span></span><span style="display:flex;"><span>    minutes <span style="color:#a6e22e">min_1</span>(<span style="color:#ae81ff">2</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> sec_1.count() <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;s + &#34;</span> <span style="color:#f92672">&lt;&lt;</span> min_1.count() <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;min = &#34;</span> <span style="color:#f92672">&lt;&lt;</span> (sec_1 <span style="color:#f92672">+</span> min_1).count() <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;s</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> sec_1.count() <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;s + &#34;</span> <span style="color:#f92672">&lt;&lt;</span> min_1.count() <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;min = &#34;</span> <span style="color:#f92672">&lt;&lt;</span> duration_cast<span style="color:#f92672">&lt;</span>minutes<span style="color:#f92672">&gt;</span>(sec_1 <span style="color:#f92672">+</span> min_1).count()
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;min</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>65s + 2min <span style="color:#f92672">=</span> 185s
+</span></span><span style="display:flex;"><span>65s + 2min <span style="color:#f92672">=</span> 3min
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span>    <span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std<span style="color:#f92672">::</span>chrono;
+</span></span><span style="display:flex;"><span>    system_clock<span style="color:#f92672">::</span>time_point                                        timep <span style="color:#f92672">=</span> system_clock<span style="color:#f92672">::</span>now();
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>chrono<span style="color:#f92672">::</span>time_point<span style="color:#f92672">&lt;</span>system_clock, std<span style="color:#f92672">::</span>chrono<span style="color:#f92672">::</span>nanoseconds<span style="color:#f92672">&gt;</span> b     <span style="color:#f92672">=</span> system_clock<span style="color:#f92672">::</span>now();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">auto</span> n <span style="color:#f92672">=</span> timep.time_since_epoch();
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;1970.1.1至现在经过的纳秒: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> n.count() <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+</span></span><span style="display:flex;"><span>    seconds sec <span style="color:#f92672">=</span> duration_cast<span style="color:#f92672">&lt;</span>seconds<span style="color:#f92672">&gt;</span>(n);
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;1970.1.1至现在经过的秒: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> sec.count() <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+</span></span><span style="display:flex;"><span>    minutes m <span style="color:#f92672">=</span> duration_cast<span style="color:#f92672">&lt;</span>minutes<span style="color:#f92672">&gt;</span>(sec);
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;1970.1.1至现在经过的分钟: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> m.count() <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+</span></span><span style="display:flex;"><span>    hours h <span style="color:#f92672">=</span> duration_cast<span style="color:#f92672">&lt;</span>hours<span style="color:#f92672">&gt;</span>(sec);
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;1970.1.1至现在经过的小时: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> h.count() <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">auto</span>        tp    <span style="color:#f92672">=</span> system_clock<span style="color:#f92672">::</span>from_time_t(sec.count());
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>time_t timet <span style="color:#f92672">=</span> system_clock<span style="color:#f92672">::</span>to_time_t(tp);
+</span></span><span style="display:flex;"><span>    tm          <span style="color:#f92672">*</span>t    <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>localtime(<span style="color:#f92672">&amp;</span>timet);
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;now time: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>put_time(t, <span style="color:#e6db74">&#34;%F %T&#34;</span>) <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>1970.1.1至现在经过的纳秒: <span style="color:#ae81ff">1713938070829997614</span>
+</span></span><span style="display:flex;"><span>1970.1.1至现在经过的秒: <span style="color:#ae81ff">1713938070</span>
+</span></span><span style="display:flex;"><span>1970.1.1至现在经过的分钟: <span style="color:#ae81ff">28565634</span>
+</span></span><span style="display:flex;"><span>1970.1.1至现在经过的小时: <span style="color:#ae81ff">476093</span>
+</span></span><span style="display:flex;"><span>now time: 2024-04-24 13:54:30
+</span></span></code></pre></div><h2 id="时钟-clock">时钟 clock</h2>
+<h3 id="system_clock">system_clock</h3>
+<p>实时挂钟，一般为1970.1.1星期四00:00:00开始计时的时钟（非单调，可以被调节），精度纳秒</p>
+<h4 id="成员函数-1">成员函数</h4>
+<p>now</p>
+<p>to_time_t</p>
+<p>fromt_time_t</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span>    <span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std<span style="color:#f92672">::</span>chrono;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    time_point<span style="color:#f92672">&lt;</span>system_clock, nanoseconds<span style="color:#f92672">&gt;</span> unix_pass <span style="color:#f92672">=</span> system_clock<span style="color:#f92672">::</span>now();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    nanoseconds unix_nano <span style="color:#f92672">=</span> unix_pass.time_since_epoch();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">using</span> day <span style="color:#f92672">=</span> duration<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int32_t</span>, std<span style="color:#f92672">::</span>ratio<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">60</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">60</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">24</span><span style="color:#f92672">&gt;&gt;</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">using</span> month <span style="color:#f92672">=</span> duration<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int32_t</span>, std<span style="color:#f92672">::</span>ratio<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">60</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">60</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">24</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">30</span><span style="color:#f92672">&gt;&gt;</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">using</span> year <span style="color:#f92672">=</span> duration<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int32_t</span>, std<span style="color:#f92672">::</span>ratio<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">60</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">60</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">24</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">30</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">12</span><span style="color:#f92672">&gt;&gt;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;从1970.1.1开始经过了&#34;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    year unix_year <span style="color:#f92672">=</span> duration_cast<span style="color:#f92672">&lt;</span>year<span style="color:#f92672">&gt;</span>(unix_nano);
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> unix_year.count() <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;年</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+</span></span><span style="display:flex;"><span>    unix_nano <span style="color:#f92672">=</span> unix_nano <span style="color:#f92672">-</span> unix_year;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    month unix_month <span style="color:#f92672">=</span> duration_cast<span style="color:#f92672">&lt;</span>month<span style="color:#f92672">&gt;</span>(unix_nano);
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> unix_month.count() <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;月</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+</span></span><span style="display:flex;"><span>    unix_nano <span style="color:#f92672">=</span> unix_nano <span style="color:#f92672">-</span> unix_month;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    day unix_day <span style="color:#f92672">=</span> duration_cast<span style="color:#f92672">&lt;</span>day<span style="color:#f92672">&gt;</span>(unix_nano);
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> unix_day.count() <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;天</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+</span></span><span style="display:flex;"><span>    unix_nano <span style="color:#f92672">=</span> unix_nano <span style="color:#f92672">-</span> unix_day;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    hours unix_hour <span style="color:#f92672">=</span> duration_cast<span style="color:#f92672">&lt;</span>hours<span style="color:#f92672">&gt;</span>(unix_nano);
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> unix_hour.count() <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;小时</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+</span></span><span style="display:flex;"><span>    unix_nano <span style="color:#f92672">=</span> unix_nano <span style="color:#f92672">-</span> unix_hour;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    minutes unix_min <span style="color:#f92672">=</span> duration_cast<span style="color:#f92672">&lt;</span>minutes<span style="color:#f92672">&gt;</span>(unix_nano);
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> unix_min.count() <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;分钟</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+</span></span><span style="display:flex;"><span>    unix_nano <span style="color:#f92672">=</span> unix_nano <span style="color:#f92672">-</span> unix_min;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    seconds unix_sec <span style="color:#f92672">=</span> duration_cast<span style="color:#f92672">&lt;</span>seconds<span style="color:#f92672">&gt;</span>(unix_nano);
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> unix_sec.count() <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;秒</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>从1970.1.1开始经过了55年
+</span></span><span style="display:flex;"><span>1月
+</span></span><span style="display:flex;"><span>7天
+</span></span><span style="display:flex;"><span>6小时
+</span></span><span style="display:flex;"><span>26分钟
+</span></span><span style="display:flex;"><span>54秒
+</span></span></code></pre></div><p>这里并不准确，因为没考虑闰平年和大小月</p>
+<p>要准确的转换需要通过tm结构体</p>
+<p>system_clock::to_time_t</p>
+<p>std::localtime</p>
+<p>std::put_time</p>
+<h3 id="steady_clock">steady_clock</h3>
+<p>系统启动开始计时的单调时钟，精度纳秒</p>
+<h4 id="成员函数-2">成员函数</h4>
+<p>now</p>
+<h3 id="时间点-time_point">时间点 time_point</h3>
+<p>由一个时钟和时长组成</p>
+
 </div>
 
 
