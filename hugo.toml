@@ -1,0 +1,51 @@
+baseURL = 'http://xxx.xxx/'
+languageCode = 'zh-CN'
+
+# website title
+# 网站标题
+title = 'Elot'
+
+theme = 'dream'
+
+[params]
+lightTheme = "emerald"
+darkTheme = "forest"
+ 
+#backgroundImage = "bl.jpg"
+#backgroundImageDark = "bd.png"
+ 
+#images = ["background.png"]
+ 
+author = "elot"
+description = "elot 的生活记录～"
+avatar = "/me/yy.jpg"
+headerTitle = "elot 的博客"
+motto = "与其感慨路难行，不如马上出发。"
+ 
+#rss = true
+
+utterancesRepo = "Camelot-23/camelot-23.github.io"
+
+email = "g1enyy0ung@gmail.com"
+ 
+siteStartYear = 2024
+ 
+favicon = "/favicon.ico"
+
+# Syntax highlighting
+#customSyntaxHighlighting = true
+
+# options
+stickyNav = true
+showTableOfContents = true
+showSummaryCoverInPost = true
+showPrevNextPost = true
+# hasTwitterEmbed = true
+
+[params.advanced]
+# customCSS = ["css/custom.css"]
+# customJS = []
+ 
+[params.experimental]
+jsDate = true
+jsDateFormat = "yyyy年MM月dd日"
