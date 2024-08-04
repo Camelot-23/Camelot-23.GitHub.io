@@ -18,19 +18,19 @@ darkTheme = "forest"
  
 author = "elot"
 description = "elot 的生活记录～"
-avatar = "/me/yy.jpg"
+avatar = "/img/avatar/avatar.jpg"
 headerTitle = "elot 的博客"
-motto = "与其感慨路难行，不如马上出发。"
+motto = "re"
  
 #rss = true
 
 utterancesRepo = "Camelot-23/camelot-23.github.io"
 
-email = "g1enyy0ung@gmail.com"
+email = "elot@foxmail.com"
  
 siteStartYear = 2024
  
-favicon = "/favicon.ico"
+favicon = "/ico/E.ico"
 
 # Syntax highlighting
 #customSyntaxHighlighting = true
@@ -38,9 +38,12 @@ favicon = "/favicon.ico"
 # options
 stickyNav = true
 showTableOfContents = true
+# 在帖子中显示封面图像
 showSummaryCoverInPost = true
+# 在帖子中显示上一篇和下一篇链接
 showPrevNextPost = true
-# hasTwitterEmbed = true
+hasTwitterEmbed = false
+shareInAside = false
 
 [params.advanced]
 # customCSS = ["css/custom.css"]
@@ -49,3 +52,7 @@ showPrevNextPost = true
 [params.experimental]
 jsDate = true
 jsDateFormat = "yyyy年MM月dd日"
+
+[services]
+[services.googleAnalytics]
+ID = 'G-DXN0QXD4Z0'
