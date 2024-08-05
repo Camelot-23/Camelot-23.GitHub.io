@@ -1,4 +1,4 @@
-baseURL = 'http://xxx.xxx/'
+baseURL = 'https://camelot-23.github.io/'
 languageCode = 'zh-CN'
 
 # website title
@@ -6,6 +6,7 @@ languageCode = 'zh-CN'
 title = 'Elot'
 
 theme = 'dream'
+
 
 [params]
 lightTheme = "emerald"
@@ -56,3 +57,5 @@ jsDateFormat = "yyyy年MM月dd日"
 [services]
 [services.googleAnalytics]
 ID = 'G-DXN0QXD4Z0'
+
+
