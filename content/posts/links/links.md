@@ -9,7 +9,7 @@ cover: /img/wallpaper/ArtStation.jpg
 # images:
 #   - /img/cover.jpg
 categories:
-  - 连接保存
+  - 链接保存
   
 # nolastmod: true
 draft: false
